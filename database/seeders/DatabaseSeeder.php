@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->command->info('Starting insert Cabinets');
 
-        Cabinet::create(['name'=>'Кабинет 1']);
-        Cabinet::create(['name'=>'Кабинет 2']);
-        Cabinet::create(['name'=>'Кабинет 3']);
-        Cabinet::create(['name'=>'Кабинет 4']);
-        Cabinet::create(['name'=>'Кабинет 5']);
+        Cabinet::create(['name' => 'Кабинет 1']);
+        Cabinet::create(['name' => 'Кабинет 2']);
+        Cabinet::create(['name' => 'Кабинет 3']);
+        Cabinet::create(['name' => 'Кабинет 4']);
+        Cabinet::create(['name' => 'Кабинет 5']);
         $this->command->info('Cabinets inserted');
         $this->command->info('Starting insert work schedule Cabinets');
         $begin = new DateTime('2023-03-26');
@@ -34,18 +34,14 @@ class DatabaseSeeder extends Seeder
         $period = new DatePeriod($begin, $interval, $end);
         $cabinets = Cabinet::all();
         foreach ($period as $dt) {
-            $weekDay = $dt->format('w');
-            if ($weekDay != 0){
-                $from_date =  $dt->setTime(8,0)->format("Y-m-d H:i:s");
-                $to_date =  $dt->setTime(17,0)->format("Y-m-d H:i:s");
-                foreach ($cabinets as $cabinet){
-                    WorkScheduleCabinet::create([
-                        'cabinet_id'=>$cabinet->id,
-                        'from'=>$from_date,
-                        'to'=>$to_date
-                    ]);
-                }
-
+            $from_date = $dt->setTime(8, 0)->format("Y-m-d H:i:s");
+            $to_date = $dt->setTime(17, 0)->format("Y-m-d H:i:s");
+            foreach ($cabinets as $cabinet) {
+                WorkScheduleCabinet::create([
+                    'cabinet_id' => $cabinet->id,
+                    'from' => $from_date,
+                    'to' => $to_date
+                ]);
             }
         }
         $this->command->info('Work schedule Cabinets inserted');

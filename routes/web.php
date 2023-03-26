@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QueueCabinetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[QueueCabinetController::class, 'index'])->name('home');
+Route::post('/reserve-cabinet',[QueueCabinetController::class, 'reserve_cabinet'])->name('reserve.cabinet');

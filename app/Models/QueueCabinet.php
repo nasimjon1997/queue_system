@@ -27,12 +27,12 @@ class QueueCabinet extends Model
 
     public function cabinet()
     {
-        return $this->belongsTo(Cabinet::class, 'id', 'cabinet_id');
+        return $this->belongsTo(Cabinet::class, 'cabinet_id', 'id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 
